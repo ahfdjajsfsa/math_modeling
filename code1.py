@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.neighbors import NearestNeighbors
 from collections import deque
+from pathlib import Path
 
 # =========================
 # 全局绘图设置
@@ -23,15 +24,20 @@ plt.rcParams["legend.fontsize"] = 11
 # 1. 读取数据
 # =========================
 
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / "数据"
+OUTPUT_DIR = BASE_DIR / "数据处理"
+OUTPUT_DIR.mkdir(exist_ok=True)
+
 df = pd.read_csv(
-    r"D:\数据分析\附件1：molecular_interaction_manifest.csv",
+    DATA_DIR / "附件1：molecular_interaction_manifest.csv",
     skiprows=[1],
     encoding="gb18030"
 )
 
 num_cols = [
     "Manifold_X", "Manifold_Y", "Bioactivity_Score",
-    "LogP", "TPSA", "MolWt", "Dipole_Proxy",过，
+    "LogP", "TPSA", "MolWt", "Dipole_Proxy",
     "Max_Partial_Charge", "Balaban_J", "Bertz_CT"
 ]
 
@@ -166,7 +172,7 @@ summary = df.groupby("Region")[compare_cols].agg(
 print("\n热点区域与普通区域统计比较：")
 print(summary)
 
-summary.to_csv("Q1_region_summary.csv", encoding="utf-8-sig")
+summary.to_csv(OUTPUT_DIR / "问题1_热点区域与普通区域统计比较.csv", encoding="utf-8-sig")
 
 
 # =========================
@@ -180,7 +186,7 @@ hot_detail = df[df["Region"] == "Hotspot"].groupby("Hotspot_Label")[compare_cols
 print("\n各热点区域统计：")
 print(hot_detail)
 
-hot_detail.to_csv("Q1_hotspot_detail.csv", encoding="utf-8-sig")
+hot_detail.to_csv(OUTPUT_DIR / "问题1_各热点区域统计.csv", encoding="utf-8-sig")
 
 
 # =========================
@@ -245,7 +251,7 @@ rep = rep[rep_cols]
 print("\n代表性分子：")
 print(rep)
 
-rep.to_csv("Q1_representative_molecules.csv", index=False, encoding="utf-8-sig")
+rep.to_csv(OUTPUT_DIR / "问题1_代表性分子.csv", index=False, encoding="utf-8-sig")
 
 
 # =========================
@@ -289,8 +295,8 @@ x_pad = (x_max - x_min) * 0.08
 plt.xlim(x_min - x_pad, x_max + x_pad)
 
 plt.tight_layout()
-plt.savefig("Q1_activity_distribution.png", dpi=400)
-plt.show()
+plt.savefig(OUTPUT_DIR / "问题1_二维流形空间分子活性分布.png", dpi=400)
+plt.close()
 
 
 # -------------------------
@@ -336,8 +342,8 @@ plt.xlim(x_min - x_pad, x_max + x_pad)
 
 plt.legend()
 plt.tight_layout()
-plt.savefig("Q1_hotspot_partition.png", dpi=400)
-plt.show()
+plt.savefig(OUTPUT_DIR / "问题1_热点区域识别结果.png", dpi=400)
+plt.close()
 
 
 # -------------------------
@@ -358,14 +364,14 @@ plt.xlabel("区域")
 plt.ylabel("Bioactivity Score")
 
 plt.tight_layout()
-plt.savefig("Q1_activity_boxplot.png", dpi=400)
-plt.show()
+plt.savefig(OUTPUT_DIR / "问题1_热点区域与普通区域活性箱线图.png", dpi=400)
+plt.close()
 
 
 # =========================
 # 10. 保存结果
 # =========================
 
-df.to_csv("Q1_molecules_with_region.csv", index=False, encoding="utf-8-sig")
+df.to_csv(OUTPUT_DIR / "问题1_分子热点区域标记结果.csv", index=False, encoding="utf-8-sig")
 
 print("\n问题1完成，结果已保存。")
