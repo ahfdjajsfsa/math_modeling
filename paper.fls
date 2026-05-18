@@ -1,0 +1,4 @@
+PWD D:\Github\School\math_modeling
+INPUT C:\Users\Administrator\AppData\Local\MiKTeX\miktex\data\le\xetex\xelatex.fmt
+INPUT CUMCMThesis-master\paper.tex
+OUTPUT paper.log

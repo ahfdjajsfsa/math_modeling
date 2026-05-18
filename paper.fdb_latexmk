@@ -1,0 +1,16 @@
+# Fdb version 4
+["xdvipdfmx"] 0 "paper.xdv" "paper.pdf" "paper" 0 -1
+  "paper.xdv" 0 -1 0 "xelatex"
+  (generated)
+  "paper.pdf"
+  (rewritten before read)
+["xelatex"] 1779090353.43917 "CUMCMThesis-master/paper.tex" "paper.xdv" "paper" 1779090362.31061 2
+  "C:/Users/Administrator/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1779090361.91281 27165494 c26cc3f14fa7f4159038fdbdbab58b72 ""
+  "CUMCMThesis-master/paper.tex" 1779089580.59428 42690 0609ba69378afedbdf2eeb4a4eaab36c ""
+  "cumcmthesis.cls" 0 -1 0 ""
+  "paper.aux" 1779090345.43733 32 3985256e7290058c681f74d7a3565a19 "xelatex"
+  (generated)
+  "paper.aux"
+  "paper.log"
+  "paper.xdv"
+  (rewritten before read)
